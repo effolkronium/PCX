@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -23,19 +24,20 @@ namespace PCX
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                try
+                using var myStream = openFileDialog.OpenFile();
+                if (myStream != null)
                 {
-                    MessageBox.Show(openFileDialog.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error: {ex.Message}");
+                    using MemoryStream memoryStream = new MemoryStream();
+                    myStream.CopyTo(memoryStream);
+
+                    var image = new PCXImage(memoryStream.ToArray());
+
+                    DrawImage(image);
                 }
             }
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Stream myStream;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             saveFileDialog.Filter = "pcx files (*.pcx)|*.pcx|All files (*.*)|*.*";
@@ -44,13 +46,28 @@ namespace PCX
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if ((myStream = saveFileDialog.OpenFile()) != null)
-                {
-                    // TODO: myStream.Write
-                    // Code to write the stream goes here.
-                    myStream.Close();
-                }
+                //using var myStream = saveFileDialog.OpenFile();
+                //if (myStream != null)
+                //{
+                //    using MemoryStream memoryStream = new MemoryStream();
+                //    myStream.CopyTo(memoryStream);
+
+                //    var image = new PCXImage(memoryStream.ToArray());
+                //}
             }
+        }
+
+        void DrawImage(PCXImage image)
+        {
+            var X = new Bitmap(image.Width, image.Height);
+
+            for (int i = 0; i < image.Height; ++i)
+                for (int j = 0; j < image.Width; ++j)
+                    X.SetPixel(j, i, image.ImageData[i, j]);
+
+            graphics.DrawImage(X, Point.Empty);
+
+            X.Save(@"C:\Users\effol\Desktop\TEST\igor_data.png", ImageFormat.Png);
         }
     }
 }
