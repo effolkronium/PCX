@@ -61,14 +61,12 @@ namespace PCX
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //using var myStream = saveFileDialog.OpenFile();
-                //if (myStream != null)
-                //{
-                //    using MemoryStream memoryStream = new MemoryStream();
-                //    myStream.CopyTo(memoryStream);
-
-                //    var image = new PCXImage(memoryStream.ToArray());
-                //}
+                using var myStream = saveFileDialog.OpenFile();
+                if (myStream != null)
+                {
+                    byte[] pcxBytes = m_image.BitmapToPCX((Bitmap)m_pictureBox.Image);
+                    myStream.Write(pcxBytes, 0, pcxBytes.Length);
+                }
             }
         }
 

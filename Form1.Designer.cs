@@ -326,7 +326,7 @@
             this.Controls.Add(this.btnZoomIn);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnOpen);
-            this.MinimumSize = new System.Drawing.Size(900, 600);
+            this.MinimumSize = new System.Drawing.Size(1247, 746);
             this.Name = "MainWindow";
             this.Text = "Form_PCX";
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
