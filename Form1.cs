@@ -4,6 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PCX
 {
@@ -39,7 +41,7 @@ namespace PCX
             m_recordBlinkTimer.Interval = 500;
         }
 
-        private void MainWindow_Shown(object sender, EventArgs e)
+        private void MainWindow_Load(object sender, EventArgs e)
         {
             flowLayoutPanel.Controls.Add(m_pictureBox);
 
@@ -85,7 +87,7 @@ namespace PCX
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            if(m_imagePath != null)
+            if (m_imagePath != null)
             {
                 OpenImage(m_imagePath);
             }
@@ -148,7 +150,7 @@ namespace PCX
                 return;
 
             m_bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            
+
             Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
             Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
             m_pictureBox.Image = newBitMap;
@@ -255,6 +257,58 @@ namespace PCX
             m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n" + nmBlackWhiteRate.Value + "\n";
         }
 
+        private static ICollection<Color> GetPixelSquare(Bitmap image, int x, int y)
+        {
+            var pixels = new List<Color>();
+            pixels.Add(image.GetPixel(x + 1, y));
+            pixels.Add(image.GetPixel(x + 1, y - 1));
+            pixels.Add(image.GetPixel(x, y - 1));
+            pixels.Add(image.GetPixel(x - 1, y - 1));
+            pixels.Add(image.GetPixel(x - 1, y));
+            pixels.Add(image.GetPixel(x - 1, y + 1));
+            pixels.Add(image.GetPixel(x, y + 1));
+            pixels.Add(image.GetPixel(x + 1, y + 1));
+            pixels.Add(image.GetPixel(x, y));
+
+            return pixels;
+        }
+
+        private static int PixelTo1or0(Color pixel)
+        {
+            if (pixel.R == 0 && pixel.G == 0 && pixel.B == 0)
+                return 1;
+            return 0;
+        }
+
+        private void btnVoidFilling_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            Color[,] newImageData = new Color[m_bitmap.Width, m_bitmap.Height];
+            for (int i = 1; i < m_bitmap.Width - 1; i++)
+            {
+                for (int j = 1; j < m_bitmap.Height - 1; j++)
+                {
+                    var pixelSquare = GetPixelSquare(m_bitmap, i, j);
+                    var pixels = pixelSquare.Select(PixelTo1or0).ToArray();
+
+                    var oldCentralPixel = pixels[pixels.Length - 1];
+                    if (pixels.Sum() - oldCentralPixel >= 5)
+                        m_bitmap.SetPixel(i, j, Color.Black);
+                }
+            }
+
+
+            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
+            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
+            m_pictureBox.Image = newBitMap;
+
+            m_pictureBox.Refresh();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
         private void btnRecordStart_Click(object sender, EventArgs e)
         {
             if (m_image == null)
@@ -321,7 +375,7 @@ namespace PCX
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using var myStream = openFileDialog.OpenFile();
-                if(myStream != null)
+                if (myStream != null)
                 {
                     using var streamReader = new StreamReader(myStream);
                     operationsRecord = streamReader.ReadToEnd();
@@ -350,15 +404,10 @@ namespace PCX
                 if (records[i] == "btnBlackWhite_Click")
                     nmBlackWhiteRate.Value = int.Parse(records[++i]);
 
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
 
                 theMethod.Invoke(this, new object[] { null, null });
             }
-        }
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

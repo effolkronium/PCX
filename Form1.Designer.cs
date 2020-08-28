@@ -70,6 +70,22 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnFringeBlurringRight = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmBlackWhiteRate)).BeginInit();
             this.flowLayoutPanelControls.SuspendLayout();
@@ -79,6 +95,8 @@
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpen
@@ -553,7 +571,7 @@
             this.buttonVoidFilling.Text = "*";
             this.buttonVoidFilling.UseCompatibleTextRendering = true;
             this.buttonVoidFilling.UseVisualStyleBackColor = false;
-            this.buttonVoidFilling.Click += new System.EventHandler(this.btnBlackWhite_Click);
+            this.buttonVoidFilling.Click += new System.EventHandler(this.btnVoidFilling_Click);
             // 
             // flowLayoutPanelControls
             // 
@@ -569,6 +587,8 @@
             this.flowLayoutPanelControls.Controls.Add(this.panel5);
             this.flowLayoutPanelControls.Controls.Add(this.panel6);
             this.flowLayoutPanelControls.Controls.Add(this.panel7);
+            this.flowLayoutPanelControls.Controls.Add(this.panel8);
+            this.flowLayoutPanelControls.Controls.Add(this.panel9);
             this.flowLayoutPanelControls.Location = new System.Drawing.Point(12, 164);
             this.flowLayoutPanelControls.Name = "flowLayoutPanelControls";
             this.flowLayoutPanelControls.Size = new System.Drawing.Size(241, 605);
@@ -695,12 +715,242 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.label10);
             this.panel7.Controls.Add(this.label3);
             this.panel7.Controls.Add(this.buttonVoidFilling);
             this.panel7.Location = new System.Drawing.Point(3, 969);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(209, 132);
+            this.panel7.Size = new System.Drawing.Size(209, 144);
             this.panel7.TabIndex = 6;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(6, 131);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(203, 5);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "_________________________________________________________________________________" +
+    "________________________________________________________________________________" +
+    "______________________________________";
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label13);
+            this.panel8.Controls.Add(this.button5);
+            this.panel8.Controls.Add(this.label9);
+            this.panel8.Controls.Add(this.button4);
+            this.panel8.Controls.Add(this.label8);
+            this.panel8.Controls.Add(this.button2);
+            this.panel8.Controls.Add(this.btnFringeBlurringRight);
+            this.panel8.Location = new System.Drawing.Point(3, 1119);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(209, 170);
+            this.panel8.TabIndex = 0;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Black;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button5.FlatAppearance.BorderSize = 3;
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(21, 48);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(70, 30);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "LEFT";
+            this.button5.UseCompatibleTextRendering = true;
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.btnRecordStop_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(27, 120);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(162, 40);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "BLURRING";
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.Black;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button4.FlatAppearance.BorderSize = 3;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(120, 48);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(70, 30);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "BOT";
+            this.button4.UseCompatibleTextRendering = true;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.btnRecordRun_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(46, 81);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(119, 40);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "FRINGE";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Black;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button2.FlatAppearance.BorderSize = 3;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(120, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(70, 30);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "TOP";
+            this.button2.UseCompatibleTextRendering = true;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.btnRecordSave_Click);
+            // 
+            // btnFringeBlurringRight
+            // 
+            this.btnFringeBlurringRight.BackColor = System.Drawing.Color.Black;
+            this.btnFringeBlurringRight.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringRight.FlatAppearance.BorderSize = 3;
+            this.btnFringeBlurringRight.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringRight.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringRight.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFringeBlurringRight.ForeColor = System.Drawing.Color.White;
+            this.btnFringeBlurringRight.Location = new System.Drawing.Point(21, 12);
+            this.btnFringeBlurringRight.Name = "btnFringeBlurringRight";
+            this.btnFringeBlurringRight.Size = new System.Drawing.Size(70, 30);
+            this.btnFringeBlurringRight.TabIndex = 1;
+            this.btnFringeBlurringRight.Text = "RIGHT";
+            this.btnFringeBlurringRight.UseCompatibleTextRendering = true;
+            this.btnFringeBlurringRight.UseVisualStyleBackColor = false;
+            this.btnFringeBlurringRight.Click += new System.EventHandler(this.btnRecordStart_Click);
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.button1);
+            this.panel9.Controls.Add(this.label11);
+            this.panel9.Controls.Add(this.button3);
+            this.panel9.Controls.Add(this.label12);
+            this.panel9.Controls.Add(this.button6);
+            this.panel9.Controls.Add(this.button7);
+            this.panel9.Location = new System.Drawing.Point(3, 1295);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(209, 170);
+            this.panel9.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(21, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(70, 30);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "LEFT";
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(60, 121);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(95, 40);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "LINES";
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Black;
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(120, 48);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(70, 30);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "BOT";
+            this.button3.UseCompatibleTextRendering = true;
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(23, 81);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(164, 40);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "THINNING";
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Black;
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(120, 12);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(70, 30);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "TOP";
+            this.button6.UseCompatibleTextRendering = true;
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Black;
+            this.button7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button7.ForeColor = System.Drawing.Color.White;
+            this.button7.Location = new System.Drawing.Point(21, 12);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(70, 30);
+            this.button7.TabIndex = 1;
+            this.button7.Text = "RIGHT";
+            this.button7.UseCompatibleTextRendering = true;
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(6, 165);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(203, 5);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "_________________________________________________________________________________" +
+    "________________________________________________________________________________" +
+    "______________________________________";
             // 
             // MainWindow
             // 
@@ -717,7 +967,6 @@
             this.Name = "MainWindow";
             this.Text = "Form_PCX";
             this.Load += new System.EventHandler(this.MainWindow_Load);
-            this.Shown += new System.EventHandler(this.MainWindow_Shown);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmBlackWhiteRate)).EndInit();
@@ -734,6 +983,10 @@
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -780,6 +1033,22 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnFringeBlurringRight;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label13;
     }
 }
 
