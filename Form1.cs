@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace PCX
 {
@@ -13,15 +13,30 @@ namespace PCX
         private PCXImage m_image = null;
         private PictureBox m_pictureBox = null;
         private string m_imagePath = null;
+        private string m_operationsRecord = String.Empty;
+        private bool m_isRecording = false;
+        readonly System.Windows.Forms.Timer m_recordBlinkTimer = new System.Windows.Forms.Timer();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            flowLayoutPanel.AutoScroll = true;
             m_pictureBox = new PictureBox();
             m_pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
             m_pictureBox.BackColor = Color.Transparent;
+
+            labelRecordIndicator.Hide();
+
+            m_recordBlinkTimer.Tick += new EventHandler((Object myObject,
+                                            EventArgs myEventArgs) =>
+            {
+                if (labelRecordIndicator.Visible)
+                    labelRecordIndicator.Hide();
+                else
+                    labelRecordIndicator.Show();
+            });
+
+            m_recordBlinkTimer.Interval = 500;
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
@@ -107,6 +122,8 @@ namespace PCX
             m_pictureBox.Refresh();
 
             this.Text = "SIZE - " + m_pictureBox.Image.Width + " x " + m_pictureBox.Image.Height;
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnZoomOut_Click(object sender, EventArgs e)
@@ -121,6 +138,8 @@ namespace PCX
             m_pictureBox.Refresh();
 
             this.Text = "SIZE - " + m_pictureBox.Image.Width + " x " + m_pictureBox.Image.Height;
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnRotateRight_Click(object sender, EventArgs e)
@@ -135,6 +154,8 @@ namespace PCX
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnRotateLeft_Click(object sender, EventArgs e)
@@ -149,6 +170,8 @@ namespace PCX
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnMirrorX_Click(object sender, EventArgs e)
@@ -163,6 +186,8 @@ namespace PCX
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnMirrorY_Click(object sender, EventArgs e)
@@ -177,6 +202,8 @@ namespace PCX
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnInvert_Click(object sender, EventArgs e)
@@ -199,6 +226,8 @@ namespace PCX
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnBlackWhite_Click(object sender, EventArgs e)
@@ -212,7 +241,7 @@ namespace PCX
                 {
                     Color p = m_bitmap.GetPixel(x, y);
                     int avg = (p.R + p.G + p.B) / 3;
-                    avg = avg < 255 * (nmBlackWhiteRate.Value / 100) ? 0 : 255;     // Converting gray pixels to either pure black or pure white
+                    avg = avg < 255 * (nmBlackWhiteRate.Value / 100) ? 0 : 255;
                     m_bitmap.SetPixel(x, y, Color.FromArgb(p.A, avg, avg, avg));
                 }
             }
@@ -222,6 +251,114 @@ namespace PCX
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n" + nmBlackWhiteRate.Value + "\n";
+        }
+
+        private void btnRecordStart_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            btnRecordStart.ForeColor = Color.Red;
+            labelRecordIndicator.ForeColor = Color.Red;
+            m_operationsRecord = String.Empty;
+
+            labelRecordIndicator.Show();
+
+            m_isRecording = true;
+            m_recordBlinkTimer.Start();
+        }
+
+        private void btnRecordStop_Click(object sender, EventArgs e)
+        {
+            if (m_image == null || m_isRecording == false)
+                return;
+
+            m_isRecording = false;
+            m_recordBlinkTimer.Stop();
+            labelRecordIndicator.Show();
+
+            if (m_operationsRecord.Length == 0)
+                labelRecordIndicator.Hide();
+            else
+                labelRecordIndicator.ForeColor = Color.Aqua;
+
+            btnRecordStart.ForeColor = Color.White;
+        }
+
+        private void btnRecordSave_Click(object sender, EventArgs e)
+        {
+            if (m_image == null || m_operationsRecord.Length == 0)
+                return;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = "record files (*.record)|*.record|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using var myStream = saveFileDialog.OpenFile();
+
+                if (myStream != null)
+                {
+                    using var streamWriter = new StreamWriter(myStream);
+                    streamWriter.Write(m_operationsRecord);
+                }
+            }
+        }
+
+        private void btnRecordRun_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            var openFileDialog = new OpenFileDialog();
+            var operationsRecord = string.Empty;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using var myStream = openFileDialog.OpenFile();
+                if(myStream != null)
+                {
+                    using var streamReader = new StreamReader(myStream);
+                    operationsRecord = streamReader.ReadToEnd();
+                }
+                OpenImage(m_imagePath);
+            }
+
+            string[] records = operationsRecord.Split(
+                new[] { "\n" }, StringSplitOptions.None
+            );
+
+            for (int i = 0; i < records.Length; ++i)
+            {
+                if (String.IsNullOrWhiteSpace(records[i]))
+                    continue;
+
+                Type thisType = this.GetType();
+
+                MethodInfo theMethod = thisType.GetMethod(records[i],
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    CallingConventions.Any,
+                    new Type[] { typeof(object), typeof(EventArgs) },
+                    null);
+
+                if (records[i] == "btnBlackWhite_Click")
+                    nmBlackWhiteRate.Value = int.Parse(records[++i]);
+
+                Thread.Sleep(1000);
+
+                theMethod.Invoke(this, new object[] { null, null });
+            }
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
