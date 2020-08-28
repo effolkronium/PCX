@@ -176,6 +176,29 @@ namespace PCX
             m_pictureBox.Refresh();
         }
 
+        private void btnBlackWhite_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            for (int y = 0; y < m_bitmap.Height; y++)
+            {
+                for (int x = 0; x < m_bitmap.Width; x++)
+                {
+                    Color p = m_bitmap.GetPixel(x, y);
+                    int avg = (p.R + p.G + p.B) / 3;
+                    avg = avg < 255 * (nmBlackWhiteRate.Value / 100) ? 0 : 255;     // Converting gray pixels to either pure black or pure white
+                    m_bitmap.SetPixel(x, y, Color.FromArgb(p.A, avg, avg, avg));
+                }
+            }
+
+            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
+            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
+            m_pictureBox.Image = newBitMap;
+
+            m_pictureBox.Refresh();
+        }
+
         void DrawImage()
         {
             if (m_image == null)
