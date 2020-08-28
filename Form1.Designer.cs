@@ -49,6 +49,7 @@
             this.btnBlackWhite = new System.Windows.Forms.Button();
             this.labelBlackWhiteRate = new System.Windows.Forms.Label();
             this.nmBlackWhiteRate = new System.Windows.Forms.NumericUpDown();
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nmBlackWhiteRate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,7 +97,7 @@
             this.btnZoomIn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnZoomIn.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnZoomIn.ForeColor = System.Drawing.Color.White;
-            this.btnZoomIn.Location = new System.Drawing.Point(1155, 6);
+            this.btnZoomIn.Location = new System.Drawing.Point(1229, 6);
             this.btnZoomIn.Name = "btnZoomIn";
             this.btnZoomIn.Size = new System.Drawing.Size(53, 77);
             this.btnZoomIn.TabIndex = 1;
@@ -115,7 +116,7 @@
             this.btnZoomOut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnZoomOut.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnZoomOut.ForeColor = System.Drawing.Color.White;
-            this.btnZoomOut.Location = new System.Drawing.Point(1087, 6);
+            this.btnZoomOut.Location = new System.Drawing.Point(1161, 6);
             this.btnZoomOut.Name = "btnZoomOut";
             this.btnZoomOut.Size = new System.Drawing.Size(53, 77);
             this.btnZoomOut.TabIndex = 1;
@@ -131,7 +132,7 @@
             this.labelZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelZoom.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelZoom.ForeColor = System.Drawing.Color.White;
-            this.labelZoom.Location = new System.Drawing.Point(1078, 86);
+            this.labelZoom.Location = new System.Drawing.Point(1152, 86);
             this.labelZoom.Name = "labelZoom";
             this.labelZoom.Size = new System.Drawing.Size(139, 54);
             this.labelZoom.TabIndex = 2;
@@ -146,7 +147,7 @@
             this.flowLayoutPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowLayoutPanel.BackgroundImage")));
             this.flowLayoutPanel.Location = new System.Drawing.Point(218, 157);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(999, 542);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(1073, 666);
             this.flowLayoutPanel.TabIndex = 3;
             // 
             // labelRotate
@@ -156,7 +157,7 @@
             this.labelRotate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelRotate.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelRotate.ForeColor = System.Drawing.Color.White;
-            this.labelRotate.Location = new System.Drawing.Point(906, 86);
+            this.labelRotate.Location = new System.Drawing.Point(980, 86);
             this.labelRotate.Name = "labelRotate";
             this.labelRotate.Size = new System.Drawing.Size(166, 54);
             this.labelRotate.TabIndex = 2;
@@ -172,7 +173,7 @@
             this.btnRotateLeft.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnRotateLeft.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnRotateLeft.ForeColor = System.Drawing.Color.White;
-            this.btnRotateLeft.Location = new System.Drawing.Point(924, 6);
+            this.btnRotateLeft.Location = new System.Drawing.Point(998, 6);
             this.btnRotateLeft.Name = "btnRotateLeft";
             this.btnRotateLeft.Size = new System.Drawing.Size(53, 77);
             this.btnRotateLeft.TabIndex = 1;
@@ -191,7 +192,7 @@
             this.btnRotateRight.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnRotateRight.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnRotateRight.ForeColor = System.Drawing.Color.White;
-            this.btnRotateRight.Location = new System.Drawing.Point(993, 6);
+            this.btnRotateRight.Location = new System.Drawing.Point(1067, 6);
             this.btnRotateRight.Name = "btnRotateRight";
             this.btnRotateRight.Size = new System.Drawing.Size(53, 77);
             this.btnRotateRight.TabIndex = 1;
@@ -207,7 +208,7 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(1078, 86);
+            this.label1.Location = new System.Drawing.Point(1152, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 54);
             this.label1.TabIndex = 2;
@@ -220,7 +221,7 @@
             this.labelScale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelScale.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelScale.ForeColor = System.Drawing.Color.White;
-            this.labelScale.Location = new System.Drawing.Point(1078, 86);
+            this.labelScale.Location = new System.Drawing.Point(1152, 86);
             this.labelScale.Name = "labelScale";
             this.labelScale.Size = new System.Drawing.Size(139, 54);
             this.labelScale.TabIndex = 2;
@@ -233,7 +234,7 @@
             this.labelMirror.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelMirror.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelMirror.ForeColor = System.Drawing.Color.White;
-            this.labelMirror.Location = new System.Drawing.Point(721, 86);
+            this.labelMirror.Location = new System.Drawing.Point(795, 86);
             this.labelMirror.Name = "labelMirror";
             this.labelMirror.Size = new System.Drawing.Size(182, 54);
             this.labelMirror.TabIndex = 2;
@@ -249,7 +250,7 @@
             this.btnMirrorX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMirrorX.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnMirrorX.ForeColor = System.Drawing.Color.White;
-            this.btnMirrorX.Location = new System.Drawing.Point(743, 6);
+            this.btnMirrorX.Location = new System.Drawing.Point(817, 6);
             this.btnMirrorX.Name = "btnMirrorX";
             this.btnMirrorX.Size = new System.Drawing.Size(53, 77);
             this.btnMirrorX.TabIndex = 1;
@@ -268,7 +269,7 @@
             this.btnMirrorY.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMirrorY.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnMirrorY.ForeColor = System.Drawing.Color.White;
-            this.btnMirrorY.Location = new System.Drawing.Point(818, 6);
+            this.btnMirrorY.Location = new System.Drawing.Point(892, 6);
             this.btnMirrorY.Name = "btnMirrorY";
             this.btnMirrorY.Size = new System.Drawing.Size(53, 77);
             this.btnMirrorY.TabIndex = 1;
@@ -284,7 +285,7 @@
             this.labelInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelInvert.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelInvert.ForeColor = System.Drawing.Color.White;
-            this.labelInvert.Location = new System.Drawing.Point(562, 86);
+            this.labelInvert.Location = new System.Drawing.Point(636, 86);
             this.labelInvert.Name = "labelInvert";
             this.labelInvert.Size = new System.Drawing.Size(164, 54);
             this.labelInvert.TabIndex = 2;
@@ -300,7 +301,7 @@
             this.btnInvert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnInvert.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnInvert.ForeColor = System.Drawing.Color.White;
-            this.btnInvert.Location = new System.Drawing.Point(602, 6);
+            this.btnInvert.Location = new System.Drawing.Point(676, 6);
             this.btnInvert.Name = "btnInvert";
             this.btnInvert.Size = new System.Drawing.Size(77, 77);
             this.btnInvert.TabIndex = 1;
@@ -364,12 +365,33 @@
             0,
             0});
             // 
+            // btnReset
+            // 
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReset.BackColor = System.Drawing.Color.Black;
+            this.btnReset.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnReset.FlatAppearance.BorderSize = 3;
+            this.btnReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(12, 775);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(200, 36);
+            this.btnReset.TabIndex = 1;
+            this.btnReset.Text = "RESET";
+            this.btnReset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnReset.UseCompatibleTextRendering = true;
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1229, 699);
+            this.ClientSize = new System.Drawing.Size(1303, 823);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.nmBlackWhiteRate);
             this.Controls.Add(this.labelBlackWhiteRate);
             this.Controls.Add(this.btnBlackWhite);
@@ -421,6 +443,7 @@
         private System.Windows.Forms.Button btnBlackWhite;
         private System.Windows.Forms.Label labelBlackWhiteRate;
         private System.Windows.Forms.NumericUpDown nmBlackWhiteRate;
+        private System.Windows.Forms.Button btnReset;
     }
 }
 

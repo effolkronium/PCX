@@ -12,6 +12,7 @@ namespace PCX
         private Bitmap m_bitmap = null;
         private PCXImage m_image = null;
         private PictureBox m_pictureBox = null;
+        private string m_imagePath = null;
 
         public MainWindow()
         {
@@ -30,24 +31,48 @@ namespace PCX
             this.Text = "SIZE - " + 0 + " x " + 0;
         }
 
+        private void OpenImage(string path)
+        {
+            using var myStream = File.Open(path, FileMode.Open);
+
+            if (myStream != null)
+            {
+                using MemoryStream memoryStream = new MemoryStream();
+                myStream.CopyTo(memoryStream);
+
+                m_image = new PCXImage(memoryStream.ToArray());
+
+                m_pictureBox.Height = m_image.Width;
+                m_pictureBox.Width = m_image.Height;
+
+                m_bitmap = new Bitmap(m_image.Width, m_image.Height);
+
+                for (int i = 0; i < m_image.Height; ++i)
+                    for (int j = 0; j < m_image.Width; ++j)
+                        m_bitmap.SetPixel(j, i, m_image.ImageData[i, j]);
+
+                m_pictureBox.Image = m_bitmap;
+
+                this.Text = "SIZE - " + m_pictureBox.Image.Width + " x " + m_pictureBox.Image.Height;
+            }
+        }
+
         private void btnOpen_Click(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                using var myStream = openFileDialog.OpenFile();
-                if (myStream != null)
-                {
-                    using MemoryStream memoryStream = new MemoryStream();
-                    myStream.CopyTo(memoryStream);
+                m_imagePath = openFileDialog.FileName;
+                OpenImage(m_imagePath);
+            }
+        }
 
-                    m_image = new PCXImage(memoryStream.ToArray());
-
-                    DrawImage();
-
-                    this.Text = "SIZE - " + m_pictureBox.Image.Width + " x " + m_pictureBox.Image.Height;
-                }
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            if(m_imagePath != null)
+            {
+                OpenImage(m_imagePath);
             }
         }
 
@@ -197,23 +222,6 @@ namespace PCX
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
-        }
-
-        void DrawImage()
-        {
-            if (m_image == null)
-                return;
-
-            m_pictureBox.Height = m_image.Width;
-            m_pictureBox.Width = m_image.Height;
-
-            m_bitmap = new Bitmap(m_image.Width, m_image.Height);
-
-            for (int i = 0; i < m_image.Height; ++i)
-                for (int j = 0; j < m_image.Width; ++j)
-                    m_bitmap.SetPixel(j, i, m_image.ImageData[i, j]);
-
-            m_pictureBox.Image = m_bitmap;
         }
     }
 }
