@@ -72,6 +72,9 @@ namespace PCX
 
         private void btnZoomIn_Click(object sender, EventArgs e)
         {
+            if (m_image == null)
+                return;
+
             Size newSize = new Size((int)(m_pictureBox.Image.Width * 1.2), (int)(m_pictureBox.Image.Height * 1.2));
             Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
             m_pictureBox.Image = newBitMap;
@@ -83,6 +86,9 @@ namespace PCX
 
         private void btnZoomOut_Click(object sender, EventArgs e)
         {
+            if (m_image == null)
+                return;
+
             Size newSize = new Size((int)(m_pictureBox.Image.Width / 1.2), (int)(m_pictureBox.Image.Height / 1.2));
             Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
             m_pictureBox.Image = newBitMap;
@@ -94,6 +100,9 @@ namespace PCX
 
         private void btnRotateRight_Click(object sender, EventArgs e)
         {
+            if (m_image == null)
+                return;
+
             m_bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
             
             Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
@@ -105,6 +114,9 @@ namespace PCX
 
         private void btnRotateLeft_Click(object sender, EventArgs e)
         {
+            if (m_image == null)
+                return;
+
             m_bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
 
             Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
@@ -116,6 +128,9 @@ namespace PCX
 
         private void btnMirrorX_Click(object sender, EventArgs e)
         {
+            if (m_image == null)
+                return;
+
             m_bitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
             Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
@@ -127,6 +142,9 @@ namespace PCX
 
         private void btnMirrorY_Click(object sender, EventArgs e)
         {
+            if (m_image == null)
+                return;
+
             m_bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
@@ -138,6 +156,9 @@ namespace PCX
 
         private void btnInvert_Click(object sender, EventArgs e)
         {
+            if (m_image == null)
+                return;
+
             for (int y = 0; (y <= (m_bitmap.Height - 1)); y++)
             {
                 for (int x = 0; (x <= (m_bitmap.Width - 1)); x++)
