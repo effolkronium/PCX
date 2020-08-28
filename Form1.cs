@@ -151,13 +151,18 @@ namespace PCX
 
             m_bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
+            RefreshImage();
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void RefreshImage()
+        {
             Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
             Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
             m_pictureBox.Image = newBitMap;
 
             m_pictureBox.Refresh();
-
-            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
 
         private void btnRotateLeft_Click(object sender, EventArgs e)
@@ -167,11 +172,7 @@ namespace PCX
 
             m_bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
 
-            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
-            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
-            m_pictureBox.Image = newBitMap;
-
-            m_pictureBox.Refresh();
+            RefreshImage();
 
             m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
@@ -183,11 +184,7 @@ namespace PCX
 
             m_bitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
-            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
-            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
-            m_pictureBox.Image = newBitMap;
-
-            m_pictureBox.Refresh();
+            RefreshImage();
 
             m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
@@ -199,11 +196,7 @@ namespace PCX
 
             m_bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
-            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
-            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
-            m_pictureBox.Image = newBitMap;
-
-            m_pictureBox.Refresh();
+            RefreshImage();
 
             m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
@@ -223,11 +216,7 @@ namespace PCX
                 }
             }
 
-            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
-            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
-            m_pictureBox.Image = newBitMap;
-
-            m_pictureBox.Refresh();
+            RefreshImage();
 
             m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }
@@ -248,11 +237,7 @@ namespace PCX
                 }
             }
 
-            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
-            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
-            m_pictureBox.Image = newBitMap;
-
-            m_pictureBox.Refresh();
+            RefreshImage();
 
             m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n" + nmBlackWhiteRate.Value + "\n";
         }
@@ -280,10 +265,24 @@ namespace PCX
             return 0;
         }
 
+        private static Color PixelFrom1or0(int pixel1or0)
+        {
+            switch (pixel1or0)
+            {
+                case 1: return Color.Black;
+
+                case 0: return Color.White;
+
+                default: throw new Exception();
+            }
+        }
+
         private void btnVoidFilling_Click(object sender, EventArgs e)
         {
             if (m_image == null)
                 return;
+
+            var imgAfterProcess = new Bitmap(m_bitmap);
 
             Color[,] newImageData = new Color[m_bitmap.Width, m_bitmap.Height];
             for (int i = 1; i < m_bitmap.Width - 1; i++)
@@ -295,16 +294,153 @@ namespace PCX
 
                     var oldCentralPixel = pixels[pixels.Length - 1];
                     if (pixels.Sum() - oldCentralPixel >= 5)
-                        m_bitmap.SetPixel(i, j, Color.Black);
+                        imgAfterProcess.SetPixel(i, j, Color.Black);
                 }
             }
 
+            m_bitmap = imgAfterProcess;
 
-            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
-            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
-            m_pictureBox.Image = newBitMap;
+            RefreshImage();
 
-            m_pictureBox.Refresh();
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private Color ThinningLines(int[] pixels, int step)
+        {
+            var flags = new bool[pixels.Length];
+            for (var i = 0; i < pixels.Length; i++)
+                flags[i] = pixels[i] == 1;
+
+            if (!(!flags[(2 + step) % 8] && flags[(6 + step) % 8] && flags[flags.Length - 1]))
+                return PixelFrom1or0(pixels[pixels.Length - 1]);
+
+            var newPixelColor = !flags[(2 + step) % 8]
+                & flags[(6 + step) % 8]
+                & flags[flags.Length - 1]
+                & (!flags[(1 + step) % 8] & flags[(4 + step) % 8] | !flags[(3 + step) % 8] & flags[(0 + step) % 8] | flags[(0 + step) % 8] & flags[(4 + step) % 8]);
+
+            return newPixelColor ? Color.White : PixelFrom1or0(pixels[pixels.Length - 1]);
+        }
+
+        public Color FringeBlurring(int[] pixels, int step)
+        {
+            var flags = new bool[pixels.Length];
+            for (var i = 0; i < pixels.Length; i++)
+                flags[i] = pixels[i] == 1;
+
+            var newPixelColor = flags[pixels.Length - 1]
+                & !flags[(0 + step) % 8]
+                & !flags[(1 + step) % 8]
+                & !flags[(2 + step) % 8]
+                & !flags[(3 + step) % 8]
+                & !flags[(4 + step) % 8]
+                & (!flags[(5 + step) % 8] | flags[(6 + step) % 8]);
+
+
+            var newPixelValue = newPixelColor ? 1 : 0;
+            return PixelFrom1or0(((newPixelValue + pixels[pixels.Length - 1]) % 2));
+        }
+
+        private void ProcessImage(Func<int[], Color> processFunction)
+        {
+            var imgAfterProcess = new Bitmap(m_bitmap);
+
+            Color[,] newImageData = new Color[m_bitmap.Width, m_bitmap.Height];
+            for (int i = 1; i < m_bitmap.Width - 1; i++)
+            {
+                for (int j = 1; j < m_bitmap.Height - 1; j++)
+                {
+                    var pixelSquare = GetPixelSquare(m_bitmap, i, j);
+                    var pixels = pixelSquare.Select(PixelTo1or0).ToArray();
+
+                    Color newColor = processFunction(pixels);
+                    newColor = Color.FromArgb(m_bitmap.GetPixel(i, j).A, newColor.R, newColor.G, newColor.B);
+
+                    imgAfterProcess.SetPixel(i, j, newColor);
+                }
+            }
+
+            m_bitmap = imgAfterProcess;
+
+            RefreshImage();
+        }
+
+        private void btnThinningLinesRight_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => ThinningLines(array, 6));
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void btnThinningLinesLeft_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => ThinningLines(array, 2));
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void btnThinningLinesTop_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => FringeBlurring(array, 0));
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void btnThinningLinesBot_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => ThinningLines(array, 4));
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void btnFringeBlurringRight_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => FringeBlurring(array, 6));
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void btnFringeBlurringLeft_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => FringeBlurring(array, 2));
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void btnFringeBlurringTop_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => FringeBlurring(array, 0));
+
+            m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
+        }
+
+        private void btnFringeBlurringBot_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            ProcessImage((array) => FringeBlurring(array, 4));
 
             m_operationsRecord += MethodBase.GetCurrentMethod().Name + "\n";
         }

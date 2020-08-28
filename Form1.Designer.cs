@@ -72,20 +72,20 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnFringeBlurringLeft = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnFringeBlurringBot = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnFringeBlurringTop = new System.Windows.Forms.Button();
             this.btnFringeBlurringRight = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnThinningLinesLeft = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnThinningLinesBot = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
+            this.btnThinningLinesTop = new System.Windows.Forms.Button();
+            this.btnThinningLinesRight = new System.Windows.Forms.Button();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmBlackWhiteRate)).BeginInit();
             this.flowLayoutPanelControls.SuspendLayout();
@@ -741,34 +741,49 @@
             // panel8
             // 
             this.panel8.Controls.Add(this.label13);
-            this.panel8.Controls.Add(this.button5);
+            this.panel8.Controls.Add(this.btnFringeBlurringLeft);
             this.panel8.Controls.Add(this.label9);
-            this.panel8.Controls.Add(this.button4);
+            this.panel8.Controls.Add(this.btnFringeBlurringBot);
             this.panel8.Controls.Add(this.label8);
-            this.panel8.Controls.Add(this.button2);
+            this.panel8.Controls.Add(this.btnFringeBlurringTop);
             this.panel8.Controls.Add(this.btnFringeBlurringRight);
             this.panel8.Location = new System.Drawing.Point(3, 1119);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(209, 170);
             this.panel8.TabIndex = 0;
             // 
-            // button5
+            // label13
             // 
-            this.button5.BackColor = System.Drawing.Color.Black;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button5.FlatAppearance.BorderSize = 3;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(21, 48);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(70, 30);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "LEFT";
-            this.button5.UseCompatibleTextRendering = true;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.btnRecordStop_Click);
+            this.label13.AutoSize = true;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(6, 165);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(203, 5);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "_________________________________________________________________________________" +
+    "________________________________________________________________________________" +
+    "______________________________________";
+            // 
+            // btnFringeBlurringLeft
+            // 
+            this.btnFringeBlurringLeft.BackColor = System.Drawing.Color.Black;
+            this.btnFringeBlurringLeft.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringLeft.FlatAppearance.BorderSize = 3;
+            this.btnFringeBlurringLeft.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringLeft.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringLeft.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFringeBlurringLeft.ForeColor = System.Drawing.Color.White;
+            this.btnFringeBlurringLeft.Location = new System.Drawing.Point(21, 48);
+            this.btnFringeBlurringLeft.Name = "btnFringeBlurringLeft";
+            this.btnFringeBlurringLeft.Size = new System.Drawing.Size(70, 30);
+            this.btnFringeBlurringLeft.TabIndex = 1;
+            this.btnFringeBlurringLeft.Text = "LEFT";
+            this.btnFringeBlurringLeft.UseCompatibleTextRendering = true;
+            this.btnFringeBlurringLeft.UseVisualStyleBackColor = false;
+            this.btnFringeBlurringLeft.Click += new System.EventHandler(this.btnFringeBlurringLeft_Click);
             // 
             // label9
             // 
@@ -782,23 +797,23 @@
             this.label9.TabIndex = 2;
             this.label9.Text = "BLURRING";
             // 
-            // button4
+            // btnFringeBlurringBot
             // 
-            this.button4.BackColor = System.Drawing.Color.Black;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button4.FlatAppearance.BorderSize = 3;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(120, 48);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(70, 30);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "BOT";
-            this.button4.UseCompatibleTextRendering = true;
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.btnRecordRun_Click);
+            this.btnFringeBlurringBot.BackColor = System.Drawing.Color.Black;
+            this.btnFringeBlurringBot.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringBot.FlatAppearance.BorderSize = 3;
+            this.btnFringeBlurringBot.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringBot.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringBot.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFringeBlurringBot.ForeColor = System.Drawing.Color.White;
+            this.btnFringeBlurringBot.Location = new System.Drawing.Point(120, 48);
+            this.btnFringeBlurringBot.Name = "btnFringeBlurringBot";
+            this.btnFringeBlurringBot.Size = new System.Drawing.Size(70, 30);
+            this.btnFringeBlurringBot.TabIndex = 1;
+            this.btnFringeBlurringBot.Text = "BOT";
+            this.btnFringeBlurringBot.UseCompatibleTextRendering = true;
+            this.btnFringeBlurringBot.UseVisualStyleBackColor = false;
+            this.btnFringeBlurringBot.Click += new System.EventHandler(this.btnFringeBlurringBot_Click);
             // 
             // label8
             // 
@@ -812,23 +827,23 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "FRINGE";
             // 
-            // button2
+            // btnFringeBlurringTop
             // 
-            this.button2.BackColor = System.Drawing.Color.Black;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button2.FlatAppearance.BorderSize = 3;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(120, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(70, 30);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "TOP";
-            this.button2.UseCompatibleTextRendering = true;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.btnRecordSave_Click);
+            this.btnFringeBlurringTop.BackColor = System.Drawing.Color.Black;
+            this.btnFringeBlurringTop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringTop.FlatAppearance.BorderSize = 3;
+            this.btnFringeBlurringTop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringTop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFringeBlurringTop.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFringeBlurringTop.ForeColor = System.Drawing.Color.White;
+            this.btnFringeBlurringTop.Location = new System.Drawing.Point(120, 12);
+            this.btnFringeBlurringTop.Name = "btnFringeBlurringTop";
+            this.btnFringeBlurringTop.Size = new System.Drawing.Size(70, 30);
+            this.btnFringeBlurringTop.TabIndex = 1;
+            this.btnFringeBlurringTop.Text = "TOP";
+            this.btnFringeBlurringTop.UseCompatibleTextRendering = true;
+            this.btnFringeBlurringTop.UseVisualStyleBackColor = false;
+            this.btnFringeBlurringTop.Click += new System.EventHandler(this.btnFringeBlurringTop_Click);
             // 
             // btnFringeBlurringRight
             // 
@@ -846,33 +861,34 @@
             this.btnFringeBlurringRight.Text = "RIGHT";
             this.btnFringeBlurringRight.UseCompatibleTextRendering = true;
             this.btnFringeBlurringRight.UseVisualStyleBackColor = false;
-            this.btnFringeBlurringRight.Click += new System.EventHandler(this.btnRecordStart_Click);
+            this.btnFringeBlurringRight.Click += new System.EventHandler(this.btnFringeBlurringRight_Click);
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.button1);
+            this.panel9.Controls.Add(this.btnThinningLinesLeft);
             this.panel9.Controls.Add(this.label11);
-            this.panel9.Controls.Add(this.button3);
+            this.panel9.Controls.Add(this.btnThinningLinesBot);
             this.panel9.Controls.Add(this.label12);
-            this.panel9.Controls.Add(this.button6);
-            this.panel9.Controls.Add(this.button7);
+            this.panel9.Controls.Add(this.btnThinningLinesTop);
+            this.panel9.Controls.Add(this.btnThinningLinesRight);
             this.panel9.Location = new System.Drawing.Point(3, 1295);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(209, 170);
             this.panel9.TabIndex = 0;
             // 
-            // button1
+            // btnThinningLinesLeft
             // 
-            this.button1.BackColor = System.Drawing.Color.Black;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(21, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 30);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "LEFT";
-            this.button1.UseCompatibleTextRendering = true;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnThinningLinesLeft.BackColor = System.Drawing.Color.Black;
+            this.btnThinningLinesLeft.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnThinningLinesLeft.ForeColor = System.Drawing.Color.White;
+            this.btnThinningLinesLeft.Location = new System.Drawing.Point(21, 48);
+            this.btnThinningLinesLeft.Name = "btnThinningLinesLeft";
+            this.btnThinningLinesLeft.Size = new System.Drawing.Size(70, 30);
+            this.btnThinningLinesLeft.TabIndex = 1;
+            this.btnThinningLinesLeft.Text = "LEFT";
+            this.btnThinningLinesLeft.UseCompatibleTextRendering = true;
+            this.btnThinningLinesLeft.UseVisualStyleBackColor = false;
+            this.btnThinningLinesLeft.Click += new System.EventHandler(this.btnThinningLinesLeft_Click);
             // 
             // label11
             // 
@@ -886,18 +902,19 @@
             this.label11.TabIndex = 2;
             this.label11.Text = "LINES";
             // 
-            // button3
+            // btnThinningLinesBot
             // 
-            this.button3.BackColor = System.Drawing.Color.Black;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(120, 48);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 30);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "BOT";
-            this.button3.UseCompatibleTextRendering = true;
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnThinningLinesBot.BackColor = System.Drawing.Color.Black;
+            this.btnThinningLinesBot.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnThinningLinesBot.ForeColor = System.Drawing.Color.White;
+            this.btnThinningLinesBot.Location = new System.Drawing.Point(120, 48);
+            this.btnThinningLinesBot.Name = "btnThinningLinesBot";
+            this.btnThinningLinesBot.Size = new System.Drawing.Size(70, 30);
+            this.btnThinningLinesBot.TabIndex = 1;
+            this.btnThinningLinesBot.Text = "BOT";
+            this.btnThinningLinesBot.UseCompatibleTextRendering = true;
+            this.btnThinningLinesBot.UseVisualStyleBackColor = false;
+            this.btnThinningLinesBot.Click += new System.EventHandler(this.btnThinningLinesBot_Click);
             // 
             // label12
             // 
@@ -911,46 +928,33 @@
             this.label12.TabIndex = 2;
             this.label12.Text = "THINNING";
             // 
-            // button6
+            // btnThinningLinesTop
             // 
-            this.button6.BackColor = System.Drawing.Color.Black;
-            this.button6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(120, 12);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(70, 30);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "TOP";
-            this.button6.UseCompatibleTextRendering = true;
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnThinningLinesTop.BackColor = System.Drawing.Color.Black;
+            this.btnThinningLinesTop.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnThinningLinesTop.ForeColor = System.Drawing.Color.White;
+            this.btnThinningLinesTop.Location = new System.Drawing.Point(120, 12);
+            this.btnThinningLinesTop.Name = "btnThinningLinesTop";
+            this.btnThinningLinesTop.Size = new System.Drawing.Size(70, 30);
+            this.btnThinningLinesTop.TabIndex = 1;
+            this.btnThinningLinesTop.Text = "TOP";
+            this.btnThinningLinesTop.UseCompatibleTextRendering = true;
+            this.btnThinningLinesTop.UseVisualStyleBackColor = false;
+            this.btnThinningLinesTop.Click += new System.EventHandler(this.btnThinningLinesTop_Click);
             // 
-            // button7
+            // btnThinningLinesRight
             // 
-            this.button7.BackColor = System.Drawing.Color.Black;
-            this.button7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(21, 12);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(70, 30);
-            this.button7.TabIndex = 1;
-            this.button7.Text = "RIGHT";
-            this.button7.UseCompatibleTextRendering = true;
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(6, 165);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(203, 5);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "_________________________________________________________________________________" +
-    "________________________________________________________________________________" +
-    "______________________________________";
+            this.btnThinningLinesRight.BackColor = System.Drawing.Color.Black;
+            this.btnThinningLinesRight.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnThinningLinesRight.ForeColor = System.Drawing.Color.White;
+            this.btnThinningLinesRight.Location = new System.Drawing.Point(21, 12);
+            this.btnThinningLinesRight.Name = "btnThinningLinesRight";
+            this.btnThinningLinesRight.Size = new System.Drawing.Size(70, 30);
+            this.btnThinningLinesRight.TabIndex = 1;
+            this.btnThinningLinesRight.Text = "RIGHT";
+            this.btnThinningLinesRight.UseCompatibleTextRendering = true;
+            this.btnThinningLinesRight.UseVisualStyleBackColor = false;
+            this.btnThinningLinesRight.Click += new System.EventHandler(this.btnThinningLinesRight_Click);
             // 
             // MainWindow
             // 
@@ -1036,18 +1040,18 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnFringeBlurringLeft;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnFringeBlurringBot;
+        private System.Windows.Forms.Button btnFringeBlurringTop;
         private System.Windows.Forms.Button btnFringeBlurringRight;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnThinningLinesLeft;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnThinningLinesBot;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnThinningLinesTop;
+        private System.Windows.Forms.Button btnThinningLinesRight;
         private System.Windows.Forms.Label label13;
     }
 }
