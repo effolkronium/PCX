@@ -282,6 +282,8 @@ namespace PCX
             if (m_image == null)
                 return;
 
+            btnBlackWhite_Click(null, null);
+
             var imgAfterProcess = new Bitmap(m_bitmap);
 
             Color[,] newImageData = new Color[m_bitmap.Width, m_bitmap.Height];
@@ -353,6 +355,8 @@ namespace PCX
 
         private void ProcessImage(Func<int[], Color> processFunction)
         {
+            btnBlackWhite_Click(null, null);
+
             var imgAfterProcess = new Bitmap(m_bitmap);
 
             Color[,] newImageData = new Color[m_bitmap.Width, m_bitmap.Height];
