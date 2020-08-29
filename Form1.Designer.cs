@@ -181,7 +181,7 @@
             this.flowLayoutPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowLayoutPanel.BackgroundImage")));
             this.flowLayoutPanel.Location = new System.Drawing.Point(259, 12);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(1292, 816);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(968, 816);
             this.flowLayoutPanel.TabIndex = 3;
             // 
             // panel5
@@ -406,7 +406,7 @@
             this.nmBlackWhiteRate.Size = new System.Drawing.Size(54, 27);
             this.nmBlackWhiteRate.TabIndex = 4;
             this.nmBlackWhiteRate.Value = new decimal(new int[] {
-            50,
+            65,
             0,
             0,
             0});
@@ -961,7 +961,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1553, 823);
+            this.ClientSize = new System.Drawing.Size(1229, 823);
             this.Controls.Add(this.flowLayoutPanelControls);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.flowLayoutPanel);

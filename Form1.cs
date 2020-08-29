@@ -260,7 +260,7 @@ namespace PCX
 
         private static int PixelTo1or0(Color pixel)
         {
-            if (pixel.R == 0 && pixel.G == 0 && pixel.B == 0)
+            if (pixel.R == 0 && pixel.G == 0 && pixel.B == 0 && pixel.A != 0)
                 return 1;
             return 0;
         }
@@ -341,6 +341,16 @@ namespace PCX
             return PixelFrom1or0(((newPixelValue + pixels[pixels.Length - 1]) % 2));
         }
 
+        private static bool IsTransparent(Color color)
+        {
+            return color.A < 25;
+        }
+
+        private static bool IsWhite(Color color)
+        {
+            return color.R == 255 && color.G == 255 && color.B == 255;
+        }
+
         private void ProcessImage(Func<int[], Color> processFunction)
         {
             var imgAfterProcess = new Bitmap(m_bitmap);
@@ -352,9 +362,12 @@ namespace PCX
                 {
                     var pixelSquare = GetPixelSquare(m_bitmap, i, j);
                     var pixels = pixelSquare.Select(PixelTo1or0).ToArray();
+                    var currentPixel = m_bitmap.GetPixel(i, j);
 
                     Color newColor = processFunction(pixels);
-                    newColor = Color.FromArgb(m_bitmap.GetPixel(i, j).A, newColor.R, newColor.G, newColor.B);
+
+                    if (IsWhite(newColor) && IsTransparent(currentPixel))
+                        newColor = Color.FromArgb(currentPixel.A, newColor.R, newColor.G, newColor.B);
 
                     imgAfterProcess.SetPixel(i, j, newColor);
                 }
