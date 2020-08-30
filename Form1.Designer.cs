@@ -97,6 +97,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.labelVerticalAnalyze = new System.Windows.Forms.Label();
             this.labelHorizontalAnalyze = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.btnGetText = new System.Windows.Forms.Button();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmBlackWhiteRate)).BeginInit();
             this.flowLayoutPanelControls.SuspendLayout();
@@ -1117,12 +1119,44 @@
             this.labelHorizontalAnalyze.Size = new System.Drawing.Size(0, 23);
             this.labelHorizontalAnalyze.TabIndex = 2;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(978, 108);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(201, 54);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "GET TEXT";
+            // 
+            // btnGetText
+            // 
+            this.btnGetText.BackColor = System.Drawing.Color.Black;
+            this.btnGetText.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnGetText.FlatAppearance.BorderSize = 3;
+            this.btnGetText.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnGetText.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnGetText.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnGetText.ForeColor = System.Drawing.Color.White;
+            this.btnGetText.Location = new System.Drawing.Point(1038, 18);
+            this.btnGetText.Name = "btnGetText";
+            this.btnGetText.Size = new System.Drawing.Size(80, 80);
+            this.btnGetText.TabIndex = 1;
+            this.btnGetText.Text = "*";
+            this.btnGetText.UseCompatibleTextRendering = true;
+            this.btnGetText.UseVisualStyleBackColor = false;
+            this.btnGetText.Click += new System.EventHandler(this.btnGetText_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1229, 823);
+            this.Controls.Add(this.btnGetText);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.labelHorizontalAnalyze);
             this.Controls.Add(this.labelVerticalAnalyze);
             this.Controls.Add(this.button3);
@@ -1239,6 +1273,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label labelVerticalAnalyze;
         private System.Windows.Forms.Label labelHorizontalAnalyze;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btnGetText;
     }
 }
 

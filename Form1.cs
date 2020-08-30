@@ -596,6 +596,9 @@ namespace PCX
 
             allSymbols = SortSymbols(DefineAllSymbols());
 
+            if (null == sender)
+                return;
+
             var symbolBitmap = m_bitmap.Clone(allSymbols[0], System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             pictureBoxSymbol.Image = symbolBitmap;
 
@@ -720,7 +723,7 @@ namespace PCX
             ImageData[i, j] = 2;
             CurrPoints.Add(new Point(i, j));
 
-            for (int k = 1; k < 10; ++k)
+            for (int k = 1; k < 5; ++k)
             {
                 try
                 {
@@ -973,6 +976,57 @@ namespace PCX
                 textBox.Text = val.ToString();
             else
                 textBox.Text = "?";
+        }
+
+        private void btnGetText_Click(object sender, EventArgs e)
+        {
+            btnAnalyze_Click(null, null);
+
+            List<Rectangle> rects = DefineAllSymbols();
+            rects = SortSymbols(rects);
+            List<List<Rectangle>> allRows = DefineRows(rects);
+            string charsOnImage = "";
+
+            foreach (var row in allRows)
+            {
+                foreach (var currRect in row)
+                {
+                    int minX = (currRect.X);
+                    int minY = (currRect.Y);
+                    int maxX = (currRect.Width + currRect.X);
+                    int maxY = (currRect.Height + currRect.Y);
+
+                    bool[,] symbolData = new bool[maxX - minX, maxY - minY];
+                    for (int i = minX, x = 0; i < maxX; i++, x++)
+                        for (int j = minY, y = 0; j < maxY; j++, y++)
+                            symbolData[x, y] = IsWhite(m_bitmap.GetPixel(i, j));
+
+                    var horizontalMeasure = GetHorizontalMeasure(symbolData, maxX - minX, maxY - minY);
+
+                    var rectBitmap = m_bitmap.Clone(currRect, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                    rectBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+
+
+                    symbolData = new bool[rectBitmap.Width, rectBitmap.Height];
+                    for (int i = 0, x = 0; i < rectBitmap.Width; i++, x++)
+                        for (int j = 0, y = 0; j < rectBitmap.Height; j++, y++)
+                            symbolData[x, y] = IsWhite(rectBitmap.GetPixel(i, j));
+
+
+                    var verticalMeasure = GetHorizontalMeasure(symbolData, rectBitmap.Width, rectBitmap.Height);
+
+                    char val;
+                    if (m_symbolsDatabase.TryGetValue(
+                        string.Join(" ", horizontalMeasure) + " | " + string.Join(" ", verticalMeasure), out val))
+                        charsOnImage += val.ToString();
+                    else
+                        charsOnImage += "?";
+                }
+                charsOnImage += "\r\n";
+            }
+
+            MessageBox.Show(charsOnImage, "TEXT");
         }
     }
 }
