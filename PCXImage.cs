@@ -32,6 +32,7 @@ namespace PCX
         public int LinePaddingSize { get; set; }
 
         public Color[,] ImageData { get; set; }
+        public Color[,] ImageDataWH { get; set; }
 
         public PCXImage()
         {
@@ -56,7 +57,7 @@ namespace PCX
 
             Width = xEnd - xStart + 1;
             Height = yEnd - yStart + 1;
-
+            
             HorizontalDPI = BitConverter.ToUInt16(array, 12);
             VerticalDPI = BitConverter.ToUInt16(array, 14);
 

@@ -86,6 +86,17 @@
             this.label12 = new System.Windows.Forms.Label();
             this.btnThinningLinesTop = new System.Windows.Forms.Button();
             this.btnThinningLinesRight = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pictureBoxSymbol = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnAnalyze = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.labelVerticalAnalyze = new System.Windows.Forms.Label();
+            this.labelHorizontalAnalyze = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmBlackWhiteRate)).BeginInit();
             this.flowLayoutPanelControls.SuspendLayout();
@@ -97,6 +108,7 @@
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSymbol)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOpen
@@ -179,9 +191,9 @@
             this.flowLayoutPanel.AutoScroll = true;
             this.flowLayoutPanel.BackColor = System.Drawing.Color.Black;
             this.flowLayoutPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowLayoutPanel.BackgroundImage")));
-            this.flowLayoutPanel.Location = new System.Drawing.Point(259, 12);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(259, 168);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(968, 816);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(968, 664);
             this.flowLayoutPanel.TabIndex = 3;
             // 
             // panel5
@@ -956,12 +968,172 @@
             this.btnThinningLinesRight.UseVisualStyleBackColor = false;
             this.btnThinningLinesRight.Click += new System.EventHandler(this.btnThinningLinesRight_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button1.FlatAppearance.BorderSize = 3;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(511, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 100);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "<";
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.btnAnalyzeLeft_Click);
+            // 
+            // pictureBoxSymbol
+            // 
+            this.pictureBoxSymbol.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxSymbol.BackgroundImage")));
+            this.pictureBoxSymbol.Location = new System.Drawing.Point(570, 12);
+            this.pictureBoxSymbol.Name = "pictureBoxSymbol";
+            this.pictureBoxSymbol.Size = new System.Drawing.Size(124, 100);
+            this.pictureBoxSymbol.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSymbol.TabIndex = 6;
+            this.pictureBoxSymbol.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Black;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button2.FlatAppearance.BorderSize = 3;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(700, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(50, 100);
+            this.button2.TabIndex = 1;
+            this.button2.Text = ">";
+            this.button2.UseCompatibleTextRendering = true;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.btnAnalyzeRight_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(297, 96);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(197, 54);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "ANALYZE";
+            // 
+            // btnAnalyze
+            // 
+            this.btnAnalyze.BackColor = System.Drawing.Color.Black;
+            this.btnAnalyze.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnAnalyze.FlatAppearance.BorderSize = 3;
+            this.btnAnalyze.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnAnalyze.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnAnalyze.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAnalyze.ForeColor = System.Drawing.Color.White;
+            this.btnAnalyze.Location = new System.Drawing.Point(354, 12);
+            this.btnAnalyze.Name = "btnAnalyze";
+            this.btnAnalyze.Size = new System.Drawing.Size(80, 80);
+            this.btnAnalyze.TabIndex = 1;
+            this.btnAnalyze.Text = "*";
+            this.btnAnalyze.UseCompatibleTextRendering = true;
+            this.btnAnalyze.UseVisualStyleBackColor = false;
+            this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(533, 115);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(79, 23);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "vertical: ";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(511, 138);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(96, 23);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "horizontal:";
+            // 
+            // textBox
+            // 
+            this.textBox.Font = new System.Drawing.Font("Segoe UI", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox.Location = new System.Drawing.Point(800, 13);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(87, 101);
+            this.textBox.TabIndex = 7;
+            this.textBox.Text = "A";
+            this.textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Black;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button3.FlatAppearance.BorderSize = 3;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(767, 115);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(152, 47);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "TEACH";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.btnTeach_Click);
+            // 
+            // labelVerticalAnalyze
+            // 
+            this.labelVerticalAnalyze.AutoSize = true;
+            this.labelVerticalAnalyze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelVerticalAnalyze.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelVerticalAnalyze.ForeColor = System.Drawing.Color.White;
+            this.labelVerticalAnalyze.Location = new System.Drawing.Point(613, 115);
+            this.labelVerticalAnalyze.Name = "labelVerticalAnalyze";
+            this.labelVerticalAnalyze.Size = new System.Drawing.Size(0, 23);
+            this.labelVerticalAnalyze.TabIndex = 2;
+            // 
+            // labelHorizontalAnalyze
+            // 
+            this.labelHorizontalAnalyze.AutoSize = true;
+            this.labelHorizontalAnalyze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelHorizontalAnalyze.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelHorizontalAnalyze.ForeColor = System.Drawing.Color.White;
+            this.labelHorizontalAnalyze.Location = new System.Drawing.Point(613, 138);
+            this.labelHorizontalAnalyze.Name = "labelHorizontalAnalyze";
+            this.labelHorizontalAnalyze.Size = new System.Drawing.Size(0, 23);
+            this.labelHorizontalAnalyze.TabIndex = 2;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1229, 823);
+            this.Controls.Add(this.labelHorizontalAnalyze);
+            this.Controls.Add(this.labelVerticalAnalyze);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.textBox);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.btnAnalyze);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.pictureBoxSymbol);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanelControls);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.flowLayoutPanel);
@@ -970,6 +1142,7 @@
             this.MinimumSize = new System.Drawing.Size(1247, 746);
             this.Name = "MainWindow";
             this.Text = "Form_PCX";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -991,7 +1164,9 @@
             this.panel8.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSymbol)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1053,6 +1228,17 @@
         private System.Windows.Forms.Button btnThinningLinesTop;
         private System.Windows.Forms.Button btnThinningLinesRight;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBoxSymbol;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnAnalyze;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label labelVerticalAnalyze;
+        private System.Windows.Forms.Label labelHorizontalAnalyze;
     }
 }
 

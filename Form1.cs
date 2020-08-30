@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace PCX
 {
@@ -17,6 +18,7 @@ namespace PCX
         private string m_imagePath = null;
         private string m_operationsRecord = String.Empty;
         private bool m_isRecording = false;
+        private int zoomCount = 0;
         readonly System.Windows.Forms.Timer m_recordBlinkTimer = new System.Windows.Forms.Timer();
 
         public MainWindow()
@@ -39,6 +41,9 @@ namespace PCX
             });
 
             m_recordBlinkTimer.Interval = 500;
+            textBox.MaxLength = 1;
+
+            LoadSymbolsDatabase();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -117,6 +122,9 @@ namespace PCX
             if (m_image == null)
                 return;
 
+            if (sender != null)
+                zoomCount++;
+
             Size newSize = new Size((int)(m_pictureBox.Image.Width * 1.2), (int)(m_pictureBox.Image.Height * 1.2));
             Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
             m_pictureBox.Image = newBitMap;
@@ -132,6 +140,9 @@ namespace PCX
         {
             if (m_image == null)
                 return;
+
+            if(sender != null)
+            zoomCount--;
 
             Size newSize = new Size((int)(m_pictureBox.Image.Width / 1.2), (int)(m_pictureBox.Image.Height / 1.2));
             Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
@@ -158,9 +169,19 @@ namespace PCX
 
         private void RefreshImage()
         {
-            Size newSize = new Size(m_pictureBox.Image.Width, m_pictureBox.Image.Height);
-            Bitmap newBitMap = new Bitmap(m_bitmap, newSize);
-            m_pictureBox.Image = newBitMap;
+            m_pictureBox.Image = m_bitmap;
+
+            if(zoomCount < 0)
+            {
+                var _zoomCount = Math.Abs(zoomCount);
+                for (int i = 0; i < _zoomCount; ++i)
+                    btnZoomOut_Click(null, null);
+            }
+            else if(zoomCount > 0)
+            {
+                for (int i = 0; i < zoomCount; ++i)
+                    btnZoomIn_Click(null, null);
+            }
 
             m_pictureBox.Refresh();
         }
@@ -348,7 +369,7 @@ namespace PCX
             return color.A < 25;
         }
 
-        private static bool IsWhite(Color color)
+        public static bool IsWhite(Color color)
         {
             return color.R == 255 && color.G == 255 && color.B == 255;
         }
@@ -561,6 +582,397 @@ namespace PCX
 
                 theMethod.Invoke(this, new object[] { null, null });
             }
+        }
+
+        private List<Rectangle> allSymbols = null;
+        private int currentSymbol = 0;
+
+        private void btnAnalyze_Click(object sender, EventArgs e)
+        {
+            if (m_image == null)
+                return;
+
+            btnBlackWhite_Click(null, null);
+
+            allSymbols = SortSymbols(DefineAllSymbols());
+
+            var symbolBitmap = m_bitmap.Clone(allSymbols[0], System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            pictureBoxSymbol.Image = symbolBitmap;
+
+            SetMeasure();
+            UpdateCurrentSymbol();
+        }
+
+        private void btnAnalyzeRight_Click(object sender, EventArgs e)
+        {
+            if (m_image == null || allSymbols == null || allSymbols.Count == 0 || currentSymbol == allSymbols.Count - 1)
+                return;
+
+            var symbolBitmap = m_bitmap.Clone(allSymbols[++currentSymbol], System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            pictureBoxSymbol.Image = symbolBitmap;
+
+            SetMeasure();
+            UpdateCurrentSymbol();
+        }
+
+        private void btnAnalyzeLeft_Click(object sender, EventArgs e)
+        {
+            if (m_image == null || allSymbols == null || allSymbols.Count == 0 || currentSymbol == 0)
+                return;
+
+            var symbolBitmap = m_bitmap.Clone(allSymbols[--currentSymbol], System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            pictureBoxSymbol.Image = symbolBitmap;
+
+            SetMeasure();
+            UpdateCurrentSymbol();
+        }
+
+        private void btnTeach_Click(object sender, EventArgs e)
+        {
+            if (m_image == null || allSymbols == null)
+                return;
+
+            m_symbolsDatabase.TryAdd(labelHorizontalAnalyze.Text + " | " + labelVerticalAnalyze.Text, textBox.Text[0]);
+
+            m_symbolsDatabase[labelHorizontalAnalyze.Text + " | " + labelVerticalAnalyze.Text] = textBox.Text[0];
+
+            SaveSymbolDatabase();
+        }
+
+        private byte[,] ImageData;
+        private List<Point> CurrPoints;
+
+        public List<Rectangle> DefineAllSymbols()
+        {
+            var symbolCoords = new List<Rectangle>();
+
+            ImageData = new byte[m_bitmap.Width, m_bitmap.Height];
+            for (int i = 0; i < m_bitmap.Width; i++)
+                for (int j = 0; j < m_bitmap.Height; j++)
+                    ImageData[i, j] = (byte)(IsWhite(m_bitmap.GetPixel(i, j)) == true ? 0 : 1);
+
+            for (int i = 0; i < m_bitmap.Width; i++)
+                for (int j = 0; j < m_bitmap.Height; j++)
+                {
+                    if (ImageData[i, j] == 1)
+                        symbolCoords.Add(DefineSymbolCoords(i, j));
+                }
+
+            return symbolCoords;
+        }
+
+        public static List<Rectangle> SortSymbols(List<Rectangle> symbols)
+        {
+            List<Rectangle> sortedSymbols = new List<Rectangle>();
+            List<List<Rectangle>> allRows = new List<List<Rectangle>>();
+
+            allRows = DefineRows(symbols);
+            foreach (var row in allRows)
+                foreach (var symbol in row)
+                    sortedSymbols.Add(symbol);
+
+            return sortedSymbols;
+        }
+
+        public static List<List<Rectangle>> DefineRows(List<Rectangle> symbols)
+        {
+            List<List<Rectangle>> allRows = new List<List<Rectangle>>();
+
+            while (symbols.Any())
+            {
+                Rectangle currSymbol = symbols[0];
+                symbols.Remove(currSymbol);
+
+                int avgY = (int)(currSymbol.Y + currSymbol.Height / 2);
+                List<Rectangle> currRow = new List<Rectangle> { currSymbol };
+                foreach (var item in symbols)
+                {
+                    if (item.Y < avgY && item.Y + item.Height > avgY)
+                        currRow.Add(item);
+                }
+
+                currRow.Sort((a, b) => a.X.CompareTo(b.X));
+                symbols = symbols.Except(currRow).ToList();
+                allRows.Add(currRow);
+            }
+
+            allRows.Sort((a, b) => a.Min(p => p.Y).CompareTo(b.Min(p => p.Y)));
+
+            return allRows;
+        }
+
+
+        private Rectangle DefineSymbolCoords(int i, int j)
+        {
+            CurrPoints = new List<Point>();
+            FillSymbol(i, j);
+            int minX = CurrPoints.Min(a => (int)a.X);
+            int minY = CurrPoints.Min(a => (int)a.Y);
+            int maxX = CurrPoints.Max(a => (int)a.X);
+            int maxY = CurrPoints.Max(a => (int)a.Y);
+
+            var rect = new Rectangle(new Point(minX, minY), new Size(maxX - minX, maxY - minY));
+            return rect;
+        }
+
+        private void FillSymbol(int i, int j)
+        {
+            ImageData[i, j] = 2;
+            CurrPoints.Add(new Point(i, j));
+
+            for (int k = 1; k < 10; ++k)
+            {
+                try
+                {
+                    if (ImageData[i - k, j + 1] == 1)
+                        FillSymbol(i - k, j + 1);
+                }
+                catch (Exception e) { }
+
+                try
+                {
+                    if (ImageData[i, j + k] == 1)
+                    FillSymbol(i, j + k);
+                }
+                catch (Exception e) { }
+
+                try
+                {
+                if (ImageData[i + k, j + k] == 1)
+                    FillSymbol(i + k, j + k);
+                }
+                catch (Exception e) { }
+
+                try
+                {
+                if (ImageData[i + k, j] == 1)
+                    FillSymbol(i + k, j);
+                }
+                catch (Exception e) { }
+
+                try
+                {
+                if (ImageData[i + k, j - k] == 1)
+                    FillSymbol(i + k, j - k);
+                }
+                catch (Exception e) { }
+
+                try
+                {
+                if (ImageData[i, j - k] == 1)
+                    FillSymbol(i, j - k);
+                }
+                catch (Exception e) { }
+
+                try
+                {
+                if (ImageData[i - k, j - k] == 1)
+                    FillSymbol(i - k, j - k);
+                }
+                catch (Exception e) { }
+
+                try
+                {
+                if (ImageData[i - k, j] == 1)
+                    FillSymbol(i - k, j);
+                }
+                catch (Exception e) { }
+            }
+        }
+
+        private void SetMeasure()
+        {
+            Rectangle currRect = allSymbols[currentSymbol];
+
+            int minX = (int)(currRect.X);
+            int minY = (int)(currRect.Y);
+            int maxX = (int)(currRect.Width + currRect.X);
+            int maxY = (int)(currRect.Height + currRect.Y);
+
+            bool[,] symbolData = new bool[maxX - minX, maxY - minY];
+            for (int i = minX, x = 0; i < maxX; i++, x++)
+                for (int j = minY, y = 0; j < maxY; j++, y++)
+                    symbolData[x, y] = IsWhite(m_bitmap.GetPixel(i, j));
+
+            var horizontalMeasure = GetHorizontalMeasure(symbolData, maxX - minX, maxY - minY);
+            labelHorizontalAnalyze.Text = string.Join(" ", horizontalMeasure);
+
+            var rectBitmap = m_bitmap.Clone(currRect, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            rectBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+
+
+            symbolData = new bool[rectBitmap.Width, rectBitmap.Height];
+            for (int i = 0, x = 0; i < rectBitmap.Width; i++, x++)
+                for (int j = 0, y = 0; j < rectBitmap.Height; j++, y++)
+                    symbolData[x, y] = IsWhite(rectBitmap.GetPixel(i, j));
+
+
+            var verticalMeasure = GetHorizontalMeasure(symbolData, rectBitmap.Width, rectBitmap.Height);
+            labelVerticalAnalyze.Text = string.Join(" ", verticalMeasure);
+        }
+
+        private static List<int> RemoveDuplicates(List<int> list)
+        {
+            var nonDuplicates = new List<int>();
+
+            foreach (var element in list)
+            {
+                if (nonDuplicates.Count == 0 || nonDuplicates.Last() != element)
+                    nonDuplicates.Add(element);
+            }
+
+            return nonDuplicates;
+        }
+
+        private static bool[] RemoveSmallSequences(bool[] array, int smallNumber)
+        {
+            int count = 0;
+            bool currTarget = array[0];
+
+            List<bool> newArray = new List<bool>();
+
+            for (int i = 0; i < array.Length; ++i)
+            {
+                if (currTarget == array[i])
+                {
+                    ++count;
+                }
+                else
+                {
+                    if (count > smallNumber)
+                    {
+                        for (int j = 0; j < count; ++j)
+                            newArray.Add(currTarget);
+                    }
+
+                    currTarget = array[i];
+                    count = 1;
+                }
+            }
+
+            if (count > smallNumber)
+            {
+                for (int j = 0; j < count; ++j)
+                    newArray.Add(currTarget);
+            }
+
+            return newArray.ToArray();
+        }
+
+        public static List<int> GetHorizontalMeasure(bool[,] symbolData, int width, int height)
+        {
+            List<int> measures = new List<int>();
+
+            bool[] line = new bool[width];
+
+            int horizontalParts = 20;
+            if (horizontalParts > height)
+                horizontalParts = height;
+
+            var parts = (height - 1) / (double)horizontalParts;
+            double startH = 0;
+            int currH = (int)Math.Round(startH);
+
+            int smallPart = (int)(width * 0.06);
+            int bigPart = (int)(width * 0.70);
+
+            for (int i = 0; i <= horizontalParts; i++)
+            {
+                var newH = (int)Math.Round(startH);
+                if (currH == newH && i != 0)
+                    continue;
+
+                currH = newH;
+
+                for (int j = 0; j < width; j++)
+                {
+                    line[j] = symbolData[j, currH];
+                }
+
+                bool[] fixedLine = RemoveSmallSequences(line, smallPart);
+
+
+                bool currSign = line[0];
+                int currCount = 0;
+                int result = 0;
+
+                for (int j = 0; j < fixedLine.Length; j++)
+                {
+                    if (fixedLine[j] == currSign)
+                        currCount++;
+                    else
+                    {
+                        if (currSign == false)
+                        {
+                            if (currCount > smallPart)
+                            {
+                                if (currCount > bigPart)
+                                    result = -1;
+                                else if (result != -1)
+                                    result++;
+                            }
+                        }
+
+                        currCount = 0;
+                        currSign = fixedLine[j];
+                    }
+                }
+
+                if (currSign == false)
+                {
+                    if (currCount > smallPart)
+                    {
+                        if (currCount > bigPart)
+                            result = -1;
+                        else if (result != -1)
+                            result++;
+                    }
+                }
+
+                measures.Add(result);
+
+                startH += parts;
+            }
+
+            measures.RemoveAll(i => i == 0);
+
+            List<int> uniqueMeansures = RemoveDuplicates(measures);
+
+            return uniqueMeansures;
+        }
+
+        SortedDictionary<string, char> m_symbolsDatabase = new SortedDictionary<string, char>();
+
+        string m_symDbPath = AppDomain.CurrentDomain.BaseDirectory +
+                Path.DirectorySeparatorChar + "PCX_SYMBOLS_DATABASE.json";
+        private void SaveSymbolDatabase()
+        {
+            var serializedSymbolsDB = JsonConvert.SerializeObject(m_symbolsDatabase);
+
+            File.WriteAllText(m_symDbPath, serializedSymbolsDB);
+        }
+
+        private void LoadSymbolsDatabase()
+        {
+            if (File.Exists(m_symDbPath))
+                m_symbolsDatabase = JsonConvert.DeserializeObject<
+                    SortedDictionary<string, char>
+                >(File.ReadAllText(m_symDbPath));
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSymbolDatabase();
+        }
+
+        private void UpdateCurrentSymbol()
+        {
+            char val;
+            if (m_symbolsDatabase.TryGetValue(labelHorizontalAnalyze.Text + " | " + labelVerticalAnalyze.Text, out val))
+                textBox.Text = val.ToString();
+            else
+                textBox.Text = "?";
         }
     }
 }
